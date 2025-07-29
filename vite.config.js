@@ -3,6 +3,6 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  base: "/ArbazH-Portfolio/", // EXACT repo name, including slashes
+  base: "/ArbazH-Portfolio/", 
   plugins: [react(), tailwindcss()],
 });
