@@ -1,26 +1,24 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import React from "react";
+import arrowUp from "../assets/arrow-up.svg"; // ✅ Corrected path
 
 const ProjectDetails = ({
   title,
   description,
-  subDescription,
+  subDescription = [],
   image,
-  tags,
+  tags = [],
   href,
   closeModal,
 }) => {
   const handleContentClick = (e) => {
-    e.stopPropagation(); // Prevents closing when clicking inside modal
+    e.stopPropagation(); // Prevent closing modal on content click
   };
 
-  // Lock scroll when modal opens
   useEffect(() => {
-    document.body.style.overflow = "hidden"; // Lock scroll
-
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = ""; // Unlock on cleanup
+      document.body.style.overflow = "";
     };
   }, []);
 
@@ -79,15 +77,17 @@ const ProjectDetails = ({
             </div>
 
             {/* Project Link */}
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-medium text-white hover:underline"
-            >
-              View Project{" "}
-              <img src="assets/arrow-up.svg" className="size-4" alt="arrow" />
-            </a>
+            {href && (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-medium text-white hover:underline"
+              >
+                View Project
+                <img src={arrowUp} className="size-4" alt="arrow" />
+              </a>
+            )}
           </div>
         </div>
       </motion.div>

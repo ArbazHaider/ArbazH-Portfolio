@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion"; // fixed import
+import copyIcon from "../assets/copy.svg";
+import copyDoneIcon from "../assets/copy-done.svg";
+
 const CopyEmailButton = () => {
   const [copied, setCopied] = useState(false);
   const email = "arbazhaiders@gmail.com";
@@ -7,11 +10,9 @@ const CopyEmailButton = () => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(email);
     setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+    setTimeout(() => setCopied(false), 2000);
   };
+
   return (
     <motion.button
       onClick={copyToClipboard}
@@ -22,26 +23,26 @@ const CopyEmailButton = () => {
       <AnimatePresence mode="wait">
         {copied ? (
           <motion.p
-            className="flex items-center justify-center gap-2"
             key="copied"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.1, ease: "easeInOut" }}
+            className="flex items-center justify-center gap-2"
           >
-            <img src="/assets/copy-done.svg" className="w-5" alt="copy Icon" />
-            Copied Successfully !
+            <img src={copyDoneIcon} className="w-5" alt="Copy success icon" />
+            Copied Successfully!
           </motion.p>
         ) : (
           <motion.p
-            className="flex items-center justify-center gap-2"
             key="copy"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.1 }}
+            className="flex items-center justify-center gap-2"
           >
-            <img src="/assets/copy.svg" className="w-5" alt="copy icon" />
+            <img src={copyIcon} className="w-5" alt="Copy icon" />
             Copy Email
           </motion.p>
         )}

@@ -1,8 +1,14 @@
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import skyworld from "../assets/skyworld.png";
+import clouds from "../assets/clouds.png";
+import planetClose from "../assets/Planet_close.png";
+import marsLayer2 from "../assets/Mars_Layer2.png";
+import mountain1 from "../assets/mountain-1.png";
 
 const ParallaxBackground = () => {
   const { scrollYProgress } = useScroll();
   const x = useSpring(scrollYProgress, { damping: 50 });
+
   const mountain3Y = useTransform(x, [0, 0.5], ["0%", "60%"]);
   const planetsX = useTransform(x, [0, 0.5], ["0%", "-20%"]);
   const mountain2Y = useTransform(x, [0, 0.5], ["0%", "30%"]);
@@ -11,49 +17,49 @@ const ParallaxBackground = () => {
   return (
     <section className="absolute inset-0 bg-black/40">
       <div className="relative h-screen overflow-y-hidden">
-        {/* Background Sky */}
+        {/* Sky Background */}
         <div
           className="absolute inset-0 w-full h-screen -z-50"
           style={{
-            backgroundImage: "url(/assets/skyworld.png)",
+            backgroundImage: `url(${skyworld})`,
             backgroundPosition: "bottom",
             backgroundSize: "cover",
           }}
         />
-        {/* Mountain Layer 3 */}
+        {/* Clouds Layer */}
         <motion.div
           className="absolute inset-0 -z-40"
           style={{
-            backgroundImage: "url(/assets/clouds.png)",
+            backgroundImage: `url(${clouds})`,
             backgroundSize: "cover",
             y: mountain3Y,
           }}
         />
-        {/* Planets */}
+        {/* Planet Layer */}
         <motion.div
           className="absolute inset-0 -z-30"
           style={{
-            backgroundImage: "url(/assets/Planet_close.png)",
+            backgroundImage: `url(${planetClose})`,
             backgroundPosition: "bottom",
             backgroundSize: "cover",
             x: planetsX,
           }}
         />
-        {/* Mountain Layer 2 */}
+        {/* Mars Layer */}
         <motion.div
           className="absolute inset-0 -z-20"
           style={{
-            backgroundImage: "url(/assets/Mars_Layer2.png)",
+            backgroundImage: `url(${marsLayer2})`,
             backgroundPosition: "bottom",
             backgroundSize: "cover",
             y: mountain2Y,
           }}
         />
-        {/* Mountain Layer 1 */}
+        {/* Foreground Mountain */}
         <motion.div
           className="absolute inset-0 -z-10"
           style={{
-            backgroundImage: "url(/assets/mountain-1.png)",
+            backgroundImage: `url(${mountain1})`,
             backgroundPosition: "bottom",
             backgroundSize: "cover",
             y: mountain1Y,

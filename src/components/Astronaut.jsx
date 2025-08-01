@@ -1,33 +1,35 @@
-import React, { useRef, useEffect } from 'react'
-import { useGLTF, useAnimations } from '@react-three/drei'
+
+import React, { useRef, useEffect } from 'react';
+import { useGLTF, useAnimations } from '@react-three/drei';
 
 export function Astronaut(props) {
-  const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/models/iron_man_flying_animation.glb')
-  const { actions } = useAnimations(animations, group)
+  const group = useRef();
+  
+  const { nodes, materials, animations } = useGLTF('/assets/models/iron_man_flying_animation.glb');
+  const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
     if (actions && animations.length > 0) {
-      const action = actions[animations[0].name]
+      const action = actions[animations[0].name];
       if (action) {
-        action.reset().fadeIn(0.5).play()
+        action.reset().fadeIn(0.5).play();
       }
     }
-  }, [actions, animations])
+  }, [actions, animations]);
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group scale={1.35} position={[-6, -18, 0]}> {/* Adjusted Y position slightly lower */}
+      <group scale={1.35} position={[-6, -18, 0]}>
         <group name="Sketchfab_Scene">
           <group
             name="Sketchfab_model"
-            rotation={[Math.PI, 0, -1.8]}         // Faces forward
-            position={[0, -18, 0]}             // Moves model to center of screen
+            rotation={[Math.PI, 0, -1.8]}
+            position={[0, -18, 0]}
             scale={0.35}
           >
             <group
               name="47550bd4061844bf8d624a6de7028215fbx"
-              rotation={[Math.PI / 2.5, 2, 1]}   // Default rotation from GLTF
+              rotation={[Math.PI / 2.5, 2, 1]}
               scale={0.03}
             >
               <group name="Object_2">
@@ -62,7 +64,7 @@ export function Astronaut(props) {
         </group>
       </group>
     </group>
-  )
+  );
 }
 
-useGLTF.preload('/models/iron_man_flying_animation.glb')
+useGLTF.preload('/assets/models/iron_man_flying_animation.glb');
